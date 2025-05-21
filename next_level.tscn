@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwg8f2ly2xfgl"]
+
+[ext_resource type="Script" uid="uid://cvicexgjx8vkq" path="res://next_level.gd" id="1_1m5ts"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1m5ts"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_bn2et"]
+sky_material = SubResource("ProceduralSkyMaterial_1m5ts")
+
+[sub_resource type="Environment" id="Environment_snqbe"]
+background_mode = 2
+sky = SubResource("Sky_bn2et")
+tonemap_mode = 2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bn2et"]
+
+[node name="next_level" type="Node3D"]
+script = ExtResource("1_1m5ts")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_snqbe")
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -15.5
+offset_right = 42.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "bing bong"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_bn2et")
+
+[node name="Camera3D" type="Camera3D" parent="MeshInstance3D"]
+transform = Transform3D(0.877583, -0.229849, 0.420735, 0, 0.877583, 0.479426, -0.479426, -0.420736, 0.770151, 1.68294, 1.9177, 3.0806)
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
